@@ -125,17 +125,15 @@ corrected <- df
 # You could have Substructions be just the total effects
 Substructions <- lapply(c(1:(ncol(df)-ncol(dfCOV))),  ## for testing: lapply(c(1:1000),
              function (i) { #for gene i
-               print(i)
                total.effect <- rep(0,nrow(df)) # sums the covariate effects to subtract
                
                # go over all covariates for this gene, and add to the toal effect if significant
                for (j in c(1:length(names(LL[[i]]$coefficients[-1:0])))) {  #for each effect, don't look at the intercept
                 cov.name = names(LL[[i]]$coefficients[-1:0])[j]
                  if (BB[[i]][[4]][cov.name] < 0.05) { #if effect is significant
-                   print (cov.name)                
+                   print(paste(i,cov.name))
                    if (cov.name == 'SexMALE') {  #remap sex to 0/1
-                    
-                    cov.effect <- (remap.values(LL[[i]]$model[,names(LL[[i]]$coefficients) == 'SexMALE']) *
+                     cov.effect <- (remap.values(LL[[i]]$model[,names(LL[[i]]$coefficients) == 'SexMALE']) *
                                    LL[[i]]$coefficients[cov.name])
                   } else {
                     cov.effect <- (LL[[i]]$model[,cov.name] *
