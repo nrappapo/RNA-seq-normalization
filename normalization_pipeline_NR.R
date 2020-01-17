@@ -190,36 +190,3 @@ write.table(corrected_data, file="corrected_data.tsv", sep="\t", row.names = TRU
 #TEC	0.0100523
 #transcribed_unprocessed_pseudogene	0.0121098
 
-#nonuseful code:
-# system.time (
-#   LLM <- lapply(c(1:1000),#(ncol(df)-ncol(dfCOV))),
-#                 function (i) {
-#                   lm(as.formula(paste(colnames(df)[i],'~',paste(colnames(df)[ncol(df)-2:0],collapse =' + '))),data=df)
-#                 })
-# )
-
-
-
-# BB <- lapply(LL,function(L) {beta.t.tests(L$model[,-1:0],L$residuals,L$coefficients)})
-# zz <- sapply(c(1:1000),function(k){BB[[k]][[4]]['PMI']})
-# length(which(zz < 0.05/1000))
-# p.Sex <- sapply(c(1:1000),function(k){BB[[k]][[4]]['SexMALE']})
-# 
-# Substructions <- lapply(c(1:(ncol(df)-ncol(dfCOV))),  ## for testing: lapply(c(1:1000),
-#                         function (i) {
-#                           total.effect <- rep(0,samples) # sums the effects to substruct from all covariates
-#                           # go over all covariates for this gene, and add to the toal effect if significant
-#                           for (j in ncol(dfCOV)) {  #for each effect
-#                             if (effect is significant) {
-#                               
-#                               
-#                               sex.effect <- remap.values(LL[[i]]$model[,names(LL[[i]]$coefficients) == 'SexMALE']) *
-#                                 LL[[i]]$coefficients['SexMALE']
-#                               total.effect <- total.effect + sex.effect
-#                             }
-#                           }
-#                           total.effect <- total.effect - mean(total.effect)
-#                           corrected <- df
-#                           corrected[,i] <- corrected[,i] - total.effect
-#                           
-#                         })
